@@ -8,11 +8,12 @@ from cryptography.fernet import Fernet
 
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
-text = b"Hello World from Server"
+text = b"Hi, I'm Bob."
 
 #key = Fernet.generate_key()
 #key = "QIRqW5PdDLyEEi4EBKaVfRi-X11rg5-GpG1YX3qS-_M="
 key = os.environ['KEY_SECRET']
+
 cipher_suite = Fernet(key)
 cipher_text = cipher_suite.encrypt(text)
 

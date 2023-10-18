@@ -13,16 +13,16 @@ PORT = 65432  # The port used by the server
 
 
 # Cargando mi private key
-with open("my2_priv.pem", 'rb') as pem_in:
+with open("alice_priv.pem", 'rb') as pem_in:
     my_private_key = serialization.load_pem_private_key(pem_in.read(), password=None)
 
 # Cargando public key del destino
-with open('my1_pub.pem', 'rb') as pem_in:
+with open('bob_pub.pem', 'rb') as pem_in:
     dest_public_key = serialization.load_pem_public_key(pem_in.read())
 
 
 # Cifrando mensaje con pub key del destino
-original_text = b"Hello World from Client xD"
+original_text = b"Hello, I am Alice. I want to send you a secret message."
 cipher_text = dest_public_key.encrypt(
    original_text,
    padding.OAEP(

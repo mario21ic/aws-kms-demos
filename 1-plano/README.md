@@ -1,5 +1,5 @@
 ```
-python chat-server.py
-python chat-client.py
+python Bob-server.py
+python Alice-client.py
 ```
 

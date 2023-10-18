@@ -9,11 +9,12 @@ from cryptography.fernet import Fernet
 
 HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
-text = b"Hello World from Client"
+text = b"Hello, I am Alice"
 
-#key = Fernet.generate_key()
-#key = "QIRqW5PdDLyEEi4EBKaVfRi-X11rg5-GpG1YX3qS-_M="
+# key = Fernet.generate_key()
+# key = "QIRqW5PdDLyEEi4EBKaVfRi-X11rg5-GpG1YX3qS-_M="
 key = os.environ['KEY_SECRET']
+
 cipher_suite = Fernet(key)
 cipher_text = cipher_suite.encrypt(text)
 
