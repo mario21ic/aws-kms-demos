@@ -1,27 +1,3 @@
-## Python puro:
-Generar las keys y testeando:
-```
-./keygen.py bob
-./keygen_test.py bob
-
-./keygen.py alice
-./keygen_test.py alice
-```
-
-Probando cifrado con el public key de Alice y descifrado con private key:
-```
-./keygen_test_encrypt.py alice_pub.pem HelloWorld
-
-./keygen_test_decrypt.py bob_priv.pem HelloWorld_cipher_text.bin
-./keygen_test_decrypt.py alice_priv.pem HelloWorld_cipher_text.bin
-```
-
-Ejecutando:
-```
-python Bob-server.py
-python Alice-client.py
-```
-
 ## Aws KMS - Asimetrico (RSA):
 ```
 python aws-kms-asimetrico.py
