@@ -1,4 +1,11 @@
 ## Aws KMS Simetrico:
+
+Confidencialidad:
 ```
-python aws-kms-simetrico.py
+python aws-kms-cifrado.py
+```
+
+Integridad:
+```
+python aws-kms-integridad-hmac.py
 ```
