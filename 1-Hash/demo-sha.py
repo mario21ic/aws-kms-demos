@@ -1,6 +1,7 @@
 import hashlib
 
 informacion = b'Hello World'
+print("informacion", informacion)
 
 
 myhash = hashlib.sha1(informacion) 

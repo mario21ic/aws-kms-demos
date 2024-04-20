@@ -1,31 +1,19 @@
 import boto3
-import base64
 
 kms_client = boto3.client('kms')
-key_id = "arn:aws:kms:xxxx"
-plaintext_message = "Aws Community Day - Guatemala"
+key_id = "arn:aws:kms:xxxxx"
+mensaje = b"AWS Community Day"
+print('Mensaje original:', mensaje)
 
-def encrypt_message(message, key_id):
-    response = kms_client.encrypt(
-        KeyId=key_id,
-        Plaintext=message.encode('utf-8'),
-        EncryptionAlgorithm='RSAES_OAEP_SHA_256' # algoritmo a usar
-    )
-    return base64.b64encode(response['CiphertextBlob']).decode('utf-8')
+firma = kms_client.sign(
+    KeyId=key_id, Message=mensaje,
+    MessageType='RAW', SigningAlgorithm='RSASSA_PKCS1_V1_5_SHA_256'
+)['Signature']
+print('Firma digital:', firma)
 
-def decrypt_message(ciphertext, key_id):
-    ciphertext_blob = bytes(base64.b64decode(ciphertext))
-    response = kms_client.decrypt(
-        KeyId=key_id,
-        CiphertextBlob=ciphertext_blob,
-        EncryptionAlgorithm='RSAES_OAEP_SHA_256' # algoritmo a usar
-    )
-    return response['Plaintext'].decode('utf-8')
-
-
-encrypted_message = encrypt_message(plaintext_message, key_id)
-print(f'Mensaje cifrado: {encrypted_message}')
-
-decrypted_message = decrypt_message(encrypted_message, key_id)
-print(f'Mensaje descifrado: {decrypted_message}')
-
+es_valido = kms_client.verify(
+    KeyId=key_id, Message=mensaje,
+    MessageType='RAW', Signature=firma,
+    SigningAlgorithm='RSASSA_PKCS1_V1_5_SHA_256'
+)['SignatureValid']
+print("Verifica la firma: ", es_valido)
